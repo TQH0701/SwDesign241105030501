@@ -4,8 +4,14 @@
 ## 1. Phân tích ca sử dụng:
 
 ### Maintain Timecard
-- **Mô tả:** Nhân viên hoặc quản lý nhập thông tin chấm công (timecard) vào hệ thống.
+- **Mô tả:** Ca sử dụng này cho phép nhân viên hoặc quản lý nhập thông tin chấm công (timecard) vào hệ thống. Các thông tin bao gồm mã nhân viên, ngày làm việc, và số giờ làm việc. Dữ liệu này sẽ được lưu vào cơ sở dữ liệu để tính toán lương sau này.
 - **Actor:** Nhân viên, Quản lý
+- **Tiền điều kiện**:
+- Nhân viên hoặc quản lý đã đăng nhập thành công vào hệ thống.
+- Người dùng phải có quyền truy cập vào chức năng "Maintain Timecard".
+- **Hậu điều kiện**:
+-   Thông tin chấm công được lưu vào cơ sở dữ liệu.
+- Hệ thống phản hồi về trạng thái (thành công hoặc thất bại).
 - **Các bước thực hiện:**
   1. Nhân viên đăng nhập vào hệ thống.
   2. Chọn tùy chọn "Maintain Timecard".
@@ -17,8 +23,14 @@
   - Nhân viên không có quyền truy cập vào chức năng này.
 
 ### Calculate Payroll
-- **Mô tả:** Hệ thống tính toán bảng lương cho nhân viên dựa trên thông tin chấm công và bảng lương cơ bản.
+- **Mô tả:** Ca sử dụng này tính toán bảng lương dựa trên thông tin chấm công đã được nhập và các thông tin bảng lương cơ bản như lương cơ bản theo giờ, bảo hiểm, và thuế.
 - **Actor:** Hệ thống, Quản lý
+- **Tiền điều kiện**:
+- Thông tin chấm công của nhân viên đã được ghi nhận trong cơ sở dữ liệu.
+- Bảng lương cơ bản được thiết lập đầy đủ trong hệ thống.
+- **Hậu điều kiện**:
+- Thông tin bảng lương được lưu vào cơ sở dữ liệu.
+- Hệ thống hiển thị kết quả tính toán cho quản lý.
 - **Các bước thực hiện:**
   1. Hệ thống truy xuất thông tin chấm công của nhân viên.
   2. Tính toán tổng thu nhập dựa trên giờ làm việc và lương cơ bản.
@@ -28,6 +40,11 @@
 ### Select Payment Method
 - **Mô tả:** Nhân viên chọn phương thức thanh toán lương (chuyển khoản ngân hàng, tiền mặt).
 - **Actor:** Nhân viên
+- **Tiền điều kiện**:
+- Nhân viên đã đăng nhập thành công vào hệ thống.
+- Các phương thức thanh toán đã được thiết lập trong hệ thống.
+- **Hậu điều kiện**:
+- Thông tin về phương thức thanh toán được lưu vào cơ sở dữ liệu.
 - **Các bước thực hiện:**
   1. Nhân viên đăng nhập vào hệ thống.
   2. Chọn tùy chọn "Select Payment Method".
@@ -37,6 +54,11 @@
 ### View Pay Statement
 - **Mô tả:** Nhân viên có thể xem bảng lương của mình.
 - **Actor:** Nhân viên
+- **Tiền điều kiện**:
+- Nhân viên đã đăng nhập thành công vào hệ thống.
+- Dữ liệu bảng lương đã được tính toán và lưu vào cơ sở dữ liệu.
+- **Hậu điều kiện**:
+- Nhân viên có thể xem thông tin bảng lương chi tiết.
 - **Các bước thực hiện:**
   1. Nhân viên đăng nhập vào hệ thống.
   2. Chọn tùy chọn "View Pay Statement".
