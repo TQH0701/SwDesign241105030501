@@ -73,6 +73,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// Lớp User để lưu thông tin người dùng
+class User {
+    private String username;
+    private String password;
+    private String role; // "employee" hoặc "manager"
+
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+}
+
+// Lớp Timecard lưu thông tin chấm công
 class Timecard {
     private String employeeId;
     private String workDate;
@@ -102,6 +128,27 @@ class Timecard {
     }
 }
 
+// Lớp AuthService xác thực người dùng
+class AuthService {
+    private List<User> users;
+
+    public AuthService() {
+        users = new ArrayList<>();
+        users.add(new User("employee1", "1234", "employee"));
+        users.add(new User("manager1", "admin", "manager"));
+    }
+
+    public User login(String username, String password) {
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+}
+
+// Lớp TimecardService quản lý chấm công
 class TimecardService {
     private List<Timecard> timecards = new ArrayList<>();
 
@@ -123,10 +170,31 @@ class TimecardService {
     }
 }
 
+// Lớp chính MaintainTimecardApp
 public class MaintainTimecardApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        AuthService authService = new AuthService();
         TimecardService timecardService = new TimecardService();
+
+        System.out.print("Enter Username: ");
+        String username = scanner.next();
+        System.out.print("Enter Password: ");
+        String password = scanner.next();
+
+        User user = authService.login(username, password);
+
+        if (user == null) {
+            System.out.println("Login failed. Invalid credentials.");
+            return;
+        }
+
+        System.out.println("Login successful. Welcome, " + user.getRole() + "!");
+        
+        if (!user.getRole().equals("manager")) {
+            System.out.println("You do not have permission to maintain timecards.");
+            return;
+        }
 
         while (true) {
             System.out.println("\n=== Maintain Timecard ===");
@@ -145,6 +213,7 @@ public class MaintainTimecardApp {
                     System.out.print("Enter Hours Worked: ");
                     int hoursWorked = scanner.nextInt();
 
+                    // Kiểm tra tính hợp lệ của giờ làm việc
                     if (hoursWorked < 0 || hoursWorked > 24) {
                         System.out.println("Invalid hours worked. Please enter a value between 0 and 24.");
                     } else {
@@ -165,4 +234,5 @@ public class MaintainTimecardApp {
         }
     }
 }
+
 ```
