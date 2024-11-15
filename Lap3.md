@@ -22,36 +22,50 @@
 - `PrintService`: Subsystem đảm nhận in phiếu lương thông qua giao diện `IPrintService`.
 
 ### 1.3. ProjectManagementDatabase Subsystem Context Diagram
-![Diagram](https://www.planttext.com/api/plantuml/png/UhzxlqDnIM9HIMbk3bTgNabcIQL2G69bKNvEJd1bSKbgBbomA3yhDRd4Dp4lCJqr5oZeabYIc9HOdCh5XQ9UGLVN3hTY1Ik5u9ByebI5aCpSrEJ4eXGkt4h11g4ORQKGb5fIb9bQXj2l05BEvP2QbmBo00000F__0m00)
-
-
+![](https://www.planttext.com/api/plantuml/png/r5FBJiCm4BpdArOv0Q8jvwYAAYWIFI1Lui25ozPPqX37ZhoEK8NuCWvy4h-0RP8GzH5n9PSaipEUcTZv-lXSi4LZcqf6N1OAZ6QAX4HcMEFEQ2bljBB-JWRcSz6_f2cyHU2ksImdUrlLKk-8raQ_aB1BjDWEcpf3s-5tkZ4SlKUjmwg5xr5XJXMf8DmWaxCgb2NpZ89w9t160uCpQarNMG8FrXGgFqzWFm4S1ZWYl8JwXp24jfxyg4r93bpgPYF96LnhBGdLRulJ9Vv3R1UoXxfTF8Rrz2S_EpmRaqawjfy9n0qJnz48noynka8u4YWimsjXj_6957qBfq0XY8FlEDTDlLc86JwyK-mtZw-cquiuoDh7RkADc8jS_Karp6TTdTAf5gGo_mz-0m00__y30000)
 **Mô tả:**
-- `PayrollSystem` gửi yêu cầu Store Timecard để lưu thông tin bảng chấm công vào ProjectManagementDatabase.
-- `PayrollSystem` sau đó gửi yêu cầu Retrieve Timecard Data để lấy dữ liệu bảng chấm công từ ProjectManagementDatabase.
+- `PayrollController`: Điều khiển chính, lấy và cập nhật giờ làm việc của nhân viên cho các dự án.
+- `IProjectManagementDatabase`: Interface định nghĩa các phương thức truy xuất, cập nhật dữ liệu dự án.
+- `ProjectManagementDatabase`: Triển khai các phương thức của interface, tương tác với dữ liệu dự án thực tế.
+- `EmployeePayment`: Tính toán lương dựa trên giờ làm việc từ các dự án.
+- `Employee và Project`: Đại diện cho nhân viên và dự án.
+- `EmployeeProject`: Bảng trung gian quản lý quan hệ nhiều-nhiều giữa nhân viên và dự án.
+  ## 2. Analysis Class to Design Element Map
 
-## 2. Analysis Class to Design Element Map
-
-| Analysis Class         | Design Element            |
-|------------------------|---------------------------|
-| LoginForm              | LoginForm                 |                                    
-| MaintainTimecardForm   | TimecardForm              |                                      
-| EmployeeController     | MainEmployeeForm          |                             
-| TimecardController     | TimecardController        | 
-| SystemClockInterface   | SystemClockInterface      |   
-| PayrollController      | PayrollController         | 
-| Paycheck               | Paycheck                  | 
+|  Analysis Class | Design Element |  
+|-----------------|----------------|
+| LoginForm | LoginForm|
+| MaintainTimecardForm | MainEmployeeForm |
+| TimecardController | TimecardController |
+| PayrollController | PayrollController |
+| PayCheck | PayCheck |
+| BankService | BankService |
+| SystemClockInterface | SystemCLockInterface |
+| PayrollController | PayrollControllerImpl |
+| Employee | EmployeeEntity |
+| Timecard | TimecardEntity |
+| Payroll | PayrollProcessor |
+| BankTransaction | BankTransactionProcessor |
+| PaymentUI | PaymentUIComponent |
+| PrintService | PrintServiceProcessor |
 
 ## 3. Design Element to Owning Package Map
 
-| Design Element         | Owning Package            |
-|------------------------|---------------------------|
-| LoginForm              | UI                        | 
-| TimecardForm           | UI                        | 
-| MainEmployeeForm       | UI                        | 
-| TimecardController     | Controller                |
-| SystemClockInterface   | Interface                 | 
-| PayrollController      | Controller                | 
-| Paycheck               | Model                     | 
+|  Design Element | "Owning" Package |  
+|-----------------|----------------|
+| LoginForm | Middleware::Security::GUIFramwork |
+| MainEmployeeForm | Applications::Employee Activities |
+| TimecardController | Applications::Employee Activities |
+| SystemClockInterface | Applications::Payroll |
+| PayrollController | Applications: Payroll |
+| PayCheck | Business Services::Payroll Artifacts |
+| BankService | Business::Banking |
+| EmployeeEntity | Data Access::Employee Management |
+| TimecardEntity | Data Access::Employee Management |
+| PayrollProcessor | Business Services::Payroll Processing |
+| BankTransactionProcessor | Business Services::Banking |
+| PaymentUIComponent | Middleware::User Interface Components |
+| PaymentUIComponent | Middleware::Print Services |
 
 ## 4. Architectural Layers and Dependencies
 
