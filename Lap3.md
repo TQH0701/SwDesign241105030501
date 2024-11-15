@@ -32,26 +32,26 @@
 ## 2. Analysis Class to Design Element Map
 
 | Analysis Class         | Design Element            |
-|------------------------|---------------------------|----------------------------------------------------------------------------------------|
-| LoginForm              | LoginForm                 | Giao diện cho người dùng nhập thông tin đăng nhập                                      |
-| MaintainTimecardForm   | TimecardForm              | Giao diện quản lý và chỉnh sửa bảng chấm công.                                         |
-| EmployeeController     | MainEmployeeForm          | Điều khiển và quản lý giao diện liên quan đến nhân viên.                               |
-| TimecardController     | TimecardController        | Điều khiển các hoạt động liên quan đến bảng chấm công.                                 |
-| SystemClockInterface   | SystemClockInterface      | Giao diện truy cập giờ hệ thống, dùng để tính toán thời gian và lên lịch thanh toán.   |
-| PayrollController      | PayrollController         | Điều khiển toàn bộ quy trình xử lý thanh toán.                                         |
-| Paycheck               | Paycheck                  | Thực thể đại diện cho phiếu lương của nhân viên sau khi xử lý.                         |
+|------------------------|---------------------------|
+| LoginForm              | LoginForm                 |                                    
+| MaintainTimecardForm   | TimecardForm              |                                      
+| EmployeeController     | MainEmployeeForm          |                             
+| TimecardController     | TimecardController        | 
+| SystemClockInterface   | SystemClockInterface      |   
+| PayrollController      | PayrollController         | 
+| Paycheck               | Paycheck                  | 
 
 ## 3. Design Element to Owning Package Map
 
 | Design Element         | Owning Package            |
-|------------------------|---------------------------|----------------------------------------------------------------------------------------|
-| LoginForm              | UI                        | Thành phần giao diện cho quá trình đăng nhập của người dùng.                           |
-| TimecardForm           | UI                        | Thành phần giao diện để chỉnh sửa và duyệt bảng chấm công.                             |
-| MainEmployeeForm       | UI                        | Thành phần giao diện chính để quản lý thông tin nhân viên.                             |
-| TimecardController     | Controller                | Lớp điều khiển xử lý logic liên quan đến bảng chấm công.                               |
-| SystemClockInterface   | Interface                 | Cung cấp các hàm để lấy giờ và ngày tháng của hệ thống, hỗ trợ cho các chức năng khác. |
-| PayrollController      | Controller                | Điều khiển logic chính của hệ thống thanh toán lương.                                  |
-| Paycheck               | Model                     | Lớp đại diện dữ liệu phiếu lương, bao gồm thông tin lương và khấu trừ.                 |
+|------------------------|---------------------------|
+| LoginForm              | UI                        | 
+| TimecardForm           | UI                        | 
+| MainEmployeeForm       | UI                        | 
+| TimecardController     | Controller                |
+| SystemClockInterface   | Interface                 | 
+| PayrollController      | Controller                | 
+| Paycheck               | Model                     | 
 
 ## 4. Architectural Layers and Dependencies
 
