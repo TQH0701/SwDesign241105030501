@@ -54,7 +54,7 @@
 
   Sơ đồ lớp liên quan đến lưu trữ:
 
-  ![Diagram](https://www.planttext.com/api/plantuml/png/UhzxlqDnIM9HIMbk3bToJc9niK9eSMgHGZMN0X1afbWfPEQLWDcfkOcPELOAmIL5cNdfO942eEho_A8Kk60j5zG8byIInAJ4ubIeCSM9PQaQ86CrhHJAyZDJm89fcNaf6c13WQ8WIP1siDswkdO84wmKb7oERIXLACaul2KlNQ4aCq-XvF22J8NiZFo7knRdAN4vfEQb01qF0000__y30000)
+  ![Diagram](https://www.planttext.com/api/plantuml/png/LPBDIiD058NtWRp3fQk46heFKhfGeQ0Wb3x0RUSs6KncwlnKH7mNmHTmuSfjmVVmJRoPP6YIJM1EpdVlEPcLTMYSRviqsJTeBMmj6NXB4-2d02bAaCh1z5aiOAlaioVMIJbva6IYWrgKJGaRPwIgnexRJW1lIS116sXq9LKq7NdoYpPYwcFJuo10Pclj6m4xWXfjJI8Vl4N_daD5RYsoFEmxEWjZk-EUF58YUoo-fqaiuWOTxj1IB6CE5a-KSG1JXfROTj9Iz8jkMEl26HxFyLfqKYjm6bnD80PK11sa4jcagBn7TgGx5W5xrkwrxtEQjG3hjC6AIdZ0utLFk0g0PKTOAqT6OHC_u_9awnjqP1aSbyc7j65kKImlWKkOtVz-ULxz_Ct_maaESlwGy5JhlvzF1La8Y_kzzdmrkhpvB4rMf4IuH_y0)
 
   Giải thích:
 
@@ -63,9 +63,17 @@
 
   ### 1.4. Refine the flow of events description
   
-  Mục tiêu: Làm rõ luồng sự kiện, bao gồm cả các trường hợp đặc biệt (luồng thay thế).
+ Mục tiêu: Định nghĩa rõ cả luồng chính và luồng thay thế.
 
-  Trong Use Case Login:
+- *Luồng chính*:
+
+- Người dùng nhập thông tin đăng nhập.
+- Hệ thống xác thực kiểm tra thông tin.
+- Thông tin hợp lệ, người dùng được đăng nhập thành công.
+- *Luồng thay thế*:
+
+- Người dùng nhập sai email hoặc mật khẩu.
+- Hệ thống xác thực trả về thông báo lỗi (e.g., "Sai mật khẩu" hoặc "Tài khoản không tồn tại").
 
   - Luồng chính: Người dùng gửi thông tin đăng nhập, thông tin được xác thực và phản hồi trạng thái đăng nhập.
   - Luồng thay thế: Nếu thông tin không hợp lệ, hệ thống trả về thông báo lỗi.
@@ -83,15 +91,22 @@
 
   ### 1.5. Unify classes and subsystems
 
-  Mục tiêu: Hợp nhất các lớp và phân hệ để xây dựng một hệ thống hoàn chỉnh.
+ - *UI Subsystem*:
 
-  Trong Use Case Login:
+- Lớp LoginPage: Giao diện người dùng.
+- Lớp LoginController: Quản lý sự kiện giao diện.
+- *Authentication Subsystem*:
 
-  - Hệ thống bao gồm các lớp và phân hệ được kết nối với nhau để xử lý toàn bộ Use Case.
+- Lớp AuthService: Xử lý logic xác thực.
+- Lớp Validator: Kiểm tra tính hợp lệ của dữ liệu (format email, độ dài mật khẩu, v.v.).
+- *Database Subsystem*:
+
+- Lớp UserRepository: Kết nối với cơ sở dữ liệu, thực hiện lưu trữ và truy vấn dữ liệu.
+- Lớp Database: Quản lý kết nối với cơ sở dữ liệu.
 
   Sơ đồ lớp hợp nhất với phân hệ:
 
-  ![Diagram](https://www.planttext.com/api/plantuml/png/R591JiCm4Bpx5QkSWaG_q0Cg4XAgk17r0Pl492iSEuhNHHNggI_W8Rrn8WSEz2Dv0L_0BadQGlRadLtFpAxztNukB6F3hbAYnkmP2mdHQWc9I-t6igmYU1K0cK9hmUCX2L58NbdPB7NjEBwQGy8DwQ8lvcHhXPj7QPtYsFEpiqEBxrqRodtdLcp5IVFMSIarKuPCHa_hN_Oan_heI9c2T2mh93LeNKFjhxsO9ZzJJurH4lK_0tV8cAALqz9ZTP2pk9PnMC5fe11FfFDV4nuFvQCEm6c77Xj9o1iZpNrsuRt7_WumsFPFCPlTJ6za3j5zr-u9kFnwrmKmQJYy7NR-gClkOrz7Ol9U81pdz2GFrBMx2hZ1CwP8BAJE_NVv0G00__y30000)
+  ![Diagram](https://www.planttext.com/api/plantuml/png/VLN1Rjim3BqNw3yGEJd8ZDoDeIYmjbiF0ueQtLsnQLUOBNcId2qOzkyZ9QUH72T6W3WY-KW-FYhtrWdZnhwxlHb4zLEq2Ait9Hk9DNmNYdxtg1oK1-kmNy7VsnkWf-g4jV1cqHnF-Cb1rWL8Sa-VxHO8yjU8P2Sm1ZTn5FP2TWMKpaZLnb6FR83HKYsDDg07DC99hMmSNGidpeAddBuDTe1iCBf2Ir3hA3W_lM-WHVTSPslVmUpS5yAca6PcVQ04oqOx6UCQoN6lPHtS_eMlX5Kkk_9zbcZsiiAOumsCP3zuL2B657uAXBdJkaEXJks_X8P1g3h412AOIC6ScXXqBpf9Pln2v4eQjQeEo_04_6FoXUha3Bhnc3x7HslqYMHLEctufHntTb5EOLxSsaxOMTTMx36jY4ay5rf9VhvTdholI2fgkVTyne2DL7MMA6yTe6U0J-Gt4GQxGz3gie9oiA73WZPd-1n0FtdCknJpMJaqIdJ70CYixCUEEBMSAj8j4x6-A1McwXlDjqltS0EqA3oPwuInHe9VIjXfX07C87M2HFyrjWZiTV9BqLBEpaJnYeCsZbVtaYo2nrTKlFnwrcWRZcVIEBz9fd0aUet7WyRe_dhV-8STiw2UsVR6s8_UxuZhDELevHuLXCYqyONjplExC-qNT0jRKWDlgr_RyHIt8XIkzoCkXQFG5y4N7PTotEkjlm4eCfRCXSHUdQ9o5dvBzqunymbSJlo4hdgdicC9UwO9vHvLxVzd_WC0)
 
   Giải thích:
 
